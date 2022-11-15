@@ -9,7 +9,7 @@ const routes = [
   {
     path: "/home",
     name: "home",
-    component: () => import(/* webpackChunkName:"home" */ "../views/HomeView"),
+    component: () => import(/* webpackChunkName:"home" */ "../views/Home"),
   },
   { path: "/", redirect: { name: "home" } },
   {
