@@ -6,85 +6,85 @@ import store from "../store";
 Vue.use(Router);
 
 const routes = [
-  {
-    path: "/home",
-    name: "home",
-    component: () => import(/* webpackChunkName:"home" */ "../views/Home"),
-  },
-  { path: "/", redirect: { name: "home" } },
-  {
-    path: "/",
-    redirect: { name: "home" },
-  },
-  {
-    path: "*",
-    name: "404",
-    component: () => import(/* webpackChunkName:"home" */ "../views/404View"),
-  },
-  {
-    path: "/explore",
-    name: "explore",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/ExploreView"),
-  },
-  {
-    path: "/faq",
-    name: "faq",
-    component: () => import(/* webpackChunkName:"home" */ "../views/FAQView"),
-  },
-  {
-    path: "/token",
-    name: "token",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/OurTokenView"),
-  },
-  {
-    path: "/faucet",
-    name: "faucet",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/FaucetView"),
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: () => import(/* webpackChunkName:"home" */ "../views/AboutView"),
-  },
-  {
-    path: "/profile",
-    name: "profile",
-    component: () =>
-      import(/* webpackChunkName:"profile" */ "../views/ProfileView"),
-  },
-  {
-    path: "/:user",
-    name: "bitcoffee",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/BitcoffeeView"),
-  },
-  {
-    path: "/member/:id",
-    name: "member",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/MemberView"),
-  },
+    {
+        path: "/home",
+        name: "home",
+        component: () => import(/* webpackChunkName:"home" */ "../views/Home"),
+    },
+    { path: "/", redirect: { name: "home" } },
+    {
+        path: "/",
+        redirect: { name: "home" },
+    },
+    {
+        path: "*",
+        name: "404",
+        component: () => import(/* webpackChunkName:"home" */ "../views/404View"),
+    },
+    {
+        path: "/notice",
+        name: "notice",
+        component: () => import(/* webpackChunkName:"home" */ "../views/Board"),
+    },
+    {
+        path: "/community",
+        name: "community",
+        component: () => import(/* webpackChunkName:"home" */ "../views/Board"),
+    },
+
+    {
+        path: "/interestArea",
+        name: "interestArea",
+        component: () => import(/* webpackChunkName:"home" */ "../views/InterestArea"),
+    },
+    {
+        path: "/mypage",
+        name: "mypage",
+        component: () => import(/* webpackChunkName:"home" */ "../views/ExploreView"),
+    },
+    {
+        path: "/about",
+        name: "about",
+        component: () => import(/* webpackChunkName:"home" */ "../views/AboutView"),
+    },
+    {
+        path: "/login",
+        name: "login",
+        component: () => import(/* webpackChunkName:"profile" */ "../views/Login"),
+    },
+    {
+        path: "/boardwrite",
+        name: "boardwrite",
+        component: () => import(/* webpackChunkName:"profile" */ "../views/BoardWrite"),
+    },
+    // {
+    //     path: "/:user",
+    //     name: "bitcoffee",
+    //     component: () => import(/* webpackChunkName:"home" */ "../views/BitcoffeeView"),
+    // },
+    // {
+    //     path: "/member/:id",
+    //     name: "member",
+    //     component: () => import(/* webpackChunkName:"home" */ "../views/MemberView"),
+    // },
 ];
 
 const router = new Router({
-  linkExactActiveClass: "link-active",
-  routes,
-  mode: "hash",
-  base: "/",
-  scrollBehavior() {
-    window.scrollTo(0, 0);
-  },
+    linkExactActiveClass: "link-active",
+    routes,
+    mode: "hash",
+    base: "/",
+    scrollBehavior() {
+        window.scrollTo(0, 0);
+    },
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name === "profile" && store.state.isconnected === false) {
-    next({ name: "home" });
-  } else {
-    next();
-  }
+    if (to.name === "profile" && store.state.isconnected === false) {
+        next({ name: "home" });
+    } else {
+        next();
+    }
 });
 
 export default router;

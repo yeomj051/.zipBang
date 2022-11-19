@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NotificationList from "./components/NotificationList.vue";
+// import NotificationList from "./components/NotificationList.vue";
 
 import { mapMutations, mapState } from "vuex";
 
@@ -16,15 +16,15 @@ export default {
   data() {
     return {};
   },
-  components: {
-    NotificationList,
-  },
-  computed: {
-    ...mapState(["walletModal"]),
-  },
-  methods: {
-    ...mapMutations(["SHOW_INSTALL_WALLET"]),
-  },
+  // components: {
+  //   NotificationList,
+  // },
+  // computed: {
+  //   ...mapState(["walletModal"]),
+  // },
+  // methods: {
+  //   ...mapMutations(["SHOW_INSTALL_WALLET"]),
+  // },
 };
 </script>
 
