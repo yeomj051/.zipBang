@@ -7,6 +7,7 @@ import * as mutations from "./mutations";
 import { actions } from "./actions";
 //modules
 import aptStore from "./modules/aptStore";
+import userStore from "./modules/userStore";
 
 Vue.use(Vuex);
 
@@ -17,5 +18,6 @@ export default new Vuex.Store({
   actions,
   modules: {
     aptStore,
+    userStore,
   },
 });

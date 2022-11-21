@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-import router from "@/router";
+import router from "../../router";
 import { User } from "../../api/user";
 let userApi = new User();
 
