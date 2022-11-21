@@ -30,8 +30,21 @@ public class User extends BaseTime{
     private String token;
 
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userid='" + userid + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", introduce='" + introduce + '\'' +
+                ", gender='" + gender + '\'' +
+                ", img_address='" + img_address + '\'' +
+                ", authority='" + authority + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/apart")
+@RequestMapping("/map")
 public class DongCodeController {
 
 

@@ -1,21 +1,31 @@
 package com.zipbang.dotzipbang.Controller;
 
-import com.zipbang.dotzipbang.entity.User;
-import com.zipbang.dotzipbang.service.JwtServiceImpl;
-import com.zipbang.dotzipbang.service.UserService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import lombok.RequiredArgsConstructor;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
+
+import com.zipbang.dotzipbang.entity.User;
+import com.zipbang.dotzipbang.service.JwtServiceImpl;
+import com.zipbang.dotzipbang.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,19 +40,20 @@ public class UserController {
     private final UserService userService;
 
 
-    @ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
+	@ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> login(
             @RequestBody @ApiParam(value = "로그인 시 필요한 회원정보(아이디, 비밀번호).", required = true) User user, HttpServletResponse response ) {
 		Map<String, Object> resultMap = new HashMap<>();
+		System.out.println(user.toString());
 		HttpStatus status = null;
 		try {
 
 			User loginUser = userService.login(user);
 			if (loginUser != null) {
-				String accessToken = jwtService.createAccessToken("userid", loginUser.getUserid());// key, data
-				String refreshToken = jwtService.createRefreshToken("userid", loginUser.getUserid());// key, data
-				userService.saveRefreshToken(user.getUserid(), refreshToken);
+				String accessToken = jwtService.createAccessToken("userid", loginUser.getEmail());// key, data
+				String refreshToken = jwtService.createRefreshToken("userid", loginUser.getEmail());// key, data
+				userService.saveRefreshToken(user.getEmail(), refreshToken);
 				logger.debug("로그인 accessToken 정보 : {}", accessToken);
 				logger.debug("로그인 refreshToken 정보 : {}", refreshToken);
 				response.setHeader("access-token", accessToken);
