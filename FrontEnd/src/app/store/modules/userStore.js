@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
-import { User } from "@/api/user";
+import { User } from "../../api/user";
 let userApi = new User();
 
 const userStore = {

@@ -4,7 +4,7 @@ const api = apiInstance();
 
 //호출 주소 바꾸기
 
-class areaSearch {
+class AreaSearch {
   sidoList(success, fail) {
     api.get(`/map/sido`).then(success).catch(fail);
   }
@@ -21,4 +21,4 @@ class areaSearch {
   }
 }
 
-export { areaSearch };
+export { AreaSearch };

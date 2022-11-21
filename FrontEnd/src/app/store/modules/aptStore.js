@@ -1,5 +1,5 @@
-import { areaSearch } from "../../api/apt";
-let searchAptApi = new areaSearch();
+import { AreaSearch } from "../../api/apt";
+let searchAptApi = new AreaSearch();
 
 const aptStore = {
   namespaced: true,
