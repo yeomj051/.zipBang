@@ -129,7 +129,7 @@ public class JwtServiceImpl implements JwtService {
 
 	@Override
 	public String getUserId() {
-		return (String) this.get("user").get("userid");
+		return (String) this.get("user").get("userEmail");
 	}
 
 }

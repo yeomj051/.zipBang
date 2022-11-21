@@ -36,8 +36,8 @@ public class DongCodeController {
         return new ResponseEntity<List<DongCode>>(dongCodeService.getDongList(dongCode.substring(0,4)), HttpStatus.OK);
     }
     @GetMapping("/apart-list")
-    public ResponseEntity<?> getApartList(@RequestParam DealListView dealListView){
-        return new ResponseEntity<List<DealListView>>(dongCodeService.getApartList(dealListView), HttpStatus.OK);
+    public ResponseEntity<?> getApartList(@RequestParam String year,@RequestParam String month,@RequestParam String dongCode){
+        return new ResponseEntity<List<DealListView>>(dongCodeService.getApartList(year,month,dongCode), HttpStatus.OK);
     }
 
 }

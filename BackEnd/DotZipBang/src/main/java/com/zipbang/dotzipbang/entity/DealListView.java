@@ -9,15 +9,12 @@ import javax.persistence.*;
 
 @Entity
 @Immutable
-@Subselect("SELECT hd.deal_year, hd.deal_month, hi.dong_code, concat(hd.deal_year, '.', hd.deal_month,'.',hd.deal_day) deal_date, hd.deal_day, hi.apartment_name, hd.deal_amount, hd.area, hi.lat, hi.lng\n" +
-        "FROM house_deal hd join house_info hi on hd.apt_code = hi.apt_code")
 @Data
 @NoArgsConstructor
-@Table(name = "deal_list_view")
+
 
 public class DealListView {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "deal_list_view_id")
     private Long id;
 

@@ -15,7 +15,7 @@ public class User extends BaseTime{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private Long id;
-
+    private String userid;
     private String email;
     private String password;
     private String name;
@@ -27,6 +27,7 @@ public class User extends BaseTime{
     private String img_address;
     private String authority;
 
+    private String token;
 
 
 

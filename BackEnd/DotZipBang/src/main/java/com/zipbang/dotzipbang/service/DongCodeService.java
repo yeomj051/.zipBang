@@ -29,7 +29,7 @@ public class DongCodeService   {
         return dongCodeRepository.getDongList(dongCode);
     }
 
-    public List<DealListView> getApartList(DealListView dealListView){
-        return dealListViewRepository.findByApart(dealListView.getDealYear(),dealListView.getDealMonth(),dealListView.getApartmentName(),dealListView.getDongCode());
+    public List<DealListView> getApartList(String year,String month,String dongCode){
+        return dealListViewRepository.findByApart(year, month, dongCode);
     }
 }
