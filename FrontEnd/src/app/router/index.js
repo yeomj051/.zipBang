@@ -22,27 +22,25 @@ const routes = [
     component: () => import(/* webpackChunkName:"home" */ "../views/404View"),
   },
   {
-    path: "/explore",
-    name: "explore",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/ExploreView"),
+    path: "/notice",
+    name: "notice",
+    component: () => import(/* webpackChunkName:"home" */ "../views/Board"),
   },
   {
-    path: "/faq",
-    name: "faq",
-    component: () => import(/* webpackChunkName:"home" */ "../views/FAQView"),
+    path: "/community",
+    name: "community",
+    component: () => import(/* webpackChunkName:"home" */ "../views/Board"),
+  },
+
+  {
+    path: "/interestArea",
+    name: "interestArea",
+    component: () => import(/* webpackChunkName:"home" */ "../views/InterestArea"),
   },
   {
-    path: "/token",
-    name: "token",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/OurTokenView"),
-  },
-  {
-    path: "/faucet",
-    name: "faucet",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/FaucetView"),
+    path: "/mypage",
+    name: "mypage",
+    component: () => import(/* webpackChunkName:"home" */ "../views/ExploreView"),
   },
   {
     path: "/about",
@@ -50,23 +48,35 @@ const routes = [
     component: () => import(/* webpackChunkName:"home" */ "../views/AboutView"),
   },
   {
-    path: "/profile",
-    name: "profile",
-    component: () =>
-      import(/* webpackChunkName:"profile" */ "../views/ProfileView"),
+    path: "/login",
+    name: "login",
+    component: () => import(/* webpackChunkName:"profile" */ "../views/Login"),
   },
   {
-    path: "/:user",
-    name: "bitcoffee",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/BitcoffeeView"),
+    path: "/join",
+    name: "join",
+    component: () => import(/* webpackChunkName:"profile" */ "../views/Join"),
   },
   {
-    path: "/member/:id",
-    name: "member",
-    component: () =>
-      import(/* webpackChunkName:"home" */ "../views/MemberView"),
+    path: "/findPassword",
+    name: "findPassword",
+    component: () => import(/* webpackChunkName:"profile" */ "../views/findPassword"),
   },
+  {
+    path: "/boardwrite",
+    name: "boardwrite",
+    component: () => import(/* webpackChunkName:"profile" */ "../views/BoardWrite"),
+  },
+  // {
+  //     path: "/:user",
+  //     name: "bitcoffee",
+  //     component: () => import(/* webpackChunkName:"home" */ "../views/BitcoffeeView"),
+  // },
+  // {
+  //     path: "/member/:id",
+  //     name: "member",
+  //     component: () => import(/* webpackChunkName:"home" */ "../views/MemberView"),
+  // },
 ];
 
 const router = new Router({

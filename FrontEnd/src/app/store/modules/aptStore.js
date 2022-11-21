@@ -1,5 +1,5 @@
 import { areaSearch } from "../../api/apt";
-let searchApt = new areaSearch();
+let searchAptApi = new areaSearch();
 
 const aptStore = {
   namespaced: true,
@@ -68,7 +68,7 @@ const aptStore = {
   },
   actions: {
     getSido: ({ commit }) => {
-      searchApt.sidoList(
+      searchAptApi.sidoList(
         ({ data }) => {
           commit("SET_SIDO_LIST", data);
         },
@@ -79,7 +79,7 @@ const aptStore = {
     },
     getGugun: ({ commit }, sidoCode) => {
       const params = { sido: sidoCode };
-      searchApt.gugunList(
+      searchAptApi.gugunList(
         params,
         ({ data }) => {
           commit("SET_GUGUN_LIST", data);
@@ -91,7 +91,7 @@ const aptStore = {
     },
     getDong: ({ commit }, gugunCode) => {
       const params = { gugun: gugunCode };
-      searchApt.dongList(
+      searchAptApi.dongList(
         params,
         ({ data }) => {
           commit("SET_DONG_LIST", data);
@@ -106,7 +106,6 @@ const aptStore = {
       let year = date.getFullYear();
 
       for (let i = year; i > year - 20; i--) {
-        console.log(i);
         commit("SET_DEALYEAR_LIST", i);
       }
     },
@@ -114,7 +113,7 @@ const aptStore = {
       const params = {
         dongCode: dongCode,
       };
-      searchApt.aptList(
+      searchAptApi.aptList(
         params,
         ({ data }) => {
           commit("SET_APT_LIST", data.response.body.items.item);
