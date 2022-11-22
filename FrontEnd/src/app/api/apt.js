@@ -1,4 +1,6 @@
-import { apiInstance } from "./index.js";
+import {
+  apiInstance
+} from "./index.js";
 
 const api = apiInstance();
 
@@ -10,15 +12,23 @@ class AreaSearch {
   }
 
   gugunList(params, success, fail) {
-    api.get(`/map/gugun`, { params: params }).then(success).catch(fail);
+    api.get(`/map/gugun`, {
+      params: params
+    }).then(success).catch(fail);
   }
   dongList(params, success, fail) {
-    api.get(`/map/dong`, { params: params }).then(success).catch(fail);
+    api.get(`/map/dong`, {
+      params: params
+    }).then(success).catch(fail);
   }
 
   aptList(params, success, fail) {
-    house.get(``, { params: params }).then(success).catch(fail);
+    house.get(`/map/apart-list`, {
+      params: params
+    }).then(success).catch(fail);
   }
 }
 
-export { AreaSearch };
+export {
+  AreaSearch
+};

@@ -43,12 +43,12 @@ const aptStore = {
     },
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
-        state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
+        state.sidos.push({ value: sido.dongCode, text: sido.sidoName });
       });
     },
     SET_GUGUN_LIST(state, guguns) {
       guguns.forEach((gugun) => {
-        state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
+        state.guguns.push({ value: gugun.dongCode, text: gugun.gugunName });
       });
     },
     SET_DONG_LIST(state, dongs) {
@@ -78,7 +78,7 @@ const aptStore = {
       );
     },
     getGugun: ({ commit }, sidoCode) => {
-      const params = { sido: sidoCode };
+      const params = { dongCode: sidoCode };
       searchAptApi.gugunList(
         params,
         ({ data }) => {
@@ -90,7 +90,7 @@ const aptStore = {
       );
     },
     getDong: ({ commit }, gugunCode) => {
-      const params = { gugun: gugunCode };
+      const params = { dongCode: gugunCode };
       searchAptApi.dongList(
         params,
         ({ data }) => {
@@ -109,9 +109,11 @@ const aptStore = {
         commit("SET_DEALYEAR_LIST", i);
       }
     },
-    getAptList: ({ commit }, dongCode) => {
+    getAptList: ({ commit }, dongCode,year,month) => {
       const params = {
         dongCode: dongCode,
+        year: year,
+        month:month,
       };
       searchAptApi.aptList(
         params,
