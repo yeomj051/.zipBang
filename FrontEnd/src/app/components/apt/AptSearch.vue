@@ -123,7 +123,7 @@ export default {
       if (this.gugunCode) this.getDong(this.gugunCode);
     },
     searchApt() {
-      if (this.dongCode) this.getAptList(this.dongCode);
+      if (this.dongCode) this.getAptList(this.dongCode,this.dealYear,this.dealMonth);
     },
   },
 };
