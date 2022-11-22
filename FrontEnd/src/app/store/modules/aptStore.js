@@ -61,6 +61,7 @@ const aptStore = {
     },
     SET_APT_LIST(state, apts) {
       state.apts = apts;
+      console.log(apts[0]);
     },
     SET_DETAIL_APT(state, apt) {
       state.apt = apt;
@@ -109,16 +110,12 @@ const aptStore = {
         commit("SET_DEALYEAR_LIST", i);
       }
     },
-    getAptList: ({ commit }, dongCode,year,month) => {
-      const params = {
-        dongCode: dongCode,
-        year: year,
-        month:month,
-      };
+    getAptList: ({ commit }, params) => {
       searchAptApi.aptList(
         params,
         ({ data }) => {
-          commit("SET_APT_LIST", data.response.body.items.item);
+          console.log(data);
+          commit("SET_APT_LIST", data);
         },
         (error) => {
           console.log(error);

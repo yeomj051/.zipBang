@@ -1,7 +1,7 @@
 <template>
   <!-- 이메일 입력 -->
   <div class="search-creator text-center">
-    <div class="search-creator-input__container text-center">
+    <div class="search-creator-input__container">
       <p class="placeholder font-weight-bold"><b-icon icon="envelope"></b-icon> |</p>
       <input
         class="search-creator__input font-weight-bold"
@@ -23,28 +23,28 @@
       />
     </div>
 
-    <div class="d-initial d-lg-flex justify-content-lg-center mx-auto"></div>
+    <div class="d-initial d-lg-flex justify-content-lg-center mx-auto">
+      <!-- 로그인 버튼 -->
+      <b-button
+        id="login"
+        style="max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
+        class="ml-0 mt-3 mt-lg-0 ml-lg-4 px-4 py-2 rounded-pill font-weight-bold"
+        variant="dark"
+        @click="confirm"
+        >로그인
+      </b-button>
+      <!-- 회원가입 버튼 -->
+      <b-button
+        id="join"
+        style="max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
+        class="ml-0 mt-3 mt-lg-0 ml-lg-4 px-4 py-2 rounded-pill font-weight-bold"
+        variant="dark"
+        @click="movePageJoin"
+        >회원가입
+      </b-button>
+    </div>
     <b-row>
-      <b-col col-xs-3 class="text-center my-3">
-        <!-- 로그인 버튼 -->
-        <b-button
-          id="login"
-          style="max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
-          class="ml-0 mt-3 mt-lg-0 ml-lg-4 px-4 py-2 rounded-pill font-weight-bold"
-          variant="dark"
-          @click="confirm"
-          >로그인
-        </b-button>
-        <!-- 회원가입 버튼 -->
-        <b-button
-          id="join"
-          style="max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
-          class="ml-0 mt-3 mt-lg-0 ml-lg-4 px-4 py-2 rounded-pill font-weight-bold"
-          variant="dark"
-          @click="movePageJoin"
-          >회원가입
-        </b-button>
-      </b-col>
+      <b-col col-xs-3 class="text-center my-3"> </b-col>
     </b-row>
     <!-- 비밀번호 찾기 버튼 -->
     <b-button

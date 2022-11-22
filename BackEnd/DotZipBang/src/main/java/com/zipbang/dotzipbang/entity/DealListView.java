@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 
-
 public class DealListView {
     @Id
     @Column(name = "deal_list_view_id")
