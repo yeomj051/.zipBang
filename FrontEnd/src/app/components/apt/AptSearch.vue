@@ -35,10 +35,6 @@
           <b-col col-xs-2 class="d-flex my-3">
             <b-form-select v-model="dealYear" :options="dealYears" class="ml-0 rounded-pill"></b-form-select>
           </b-col>
-          <!-- 매매월 선택 -->
-          <b-col col-xs-2 class="d-flex my-3">
-            <b-form-select v-model="dealMonth" :options="dealMonths" class="ml-0 rounded-pill"></b-form-select>
-          </b-col>
           <b-col col-xs-1 class="d-flex my-3">
             <b-button
               id="serch"

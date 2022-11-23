@@ -28,6 +28,8 @@ public class DealListView {
     private String area;
     private String lat;
     private String lng;
+    private String buildYear;
+    private String floor;
 
 
 }

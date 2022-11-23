@@ -9,21 +9,13 @@
         class="boardListTitle ml-0 mt-3 mt-lg-0 ml-lg-4 px-4 py-2 rounded-pill font-weight-bold btn-dark"
       >
       </b-table> -->
-      <div
-        class="question-item bg-dark text-light d-flex justify-content-between w-100 px-3 px-md-4 py-1 my-4"
-        data-aos="fade-up"
-        duration="2000"
-      >
-        <div class="d-flex align-items-center">
-          <!-- <b-icon icon="question-circle" class="ml-1 ml-md-3 mr-3 mb-0"></b-icon> -->
-          <p class="my-2 mx-1 font-weight-bold">아파트명</p>
-          <p class="my-2 mx-5 font-weight-bold">가격</p>
-        </div>
-        <div class="question__icon">
-          <img src="../../assets/icons/Artboard 81 1.png" alt="" />
-        </div>
+      <div class="question-item bg-dark text-light w-100 px-3 px-md-4 py-1 my-4 row" data-aos="fade-up" duration="2000">
+        <!-- <b-icon icon="question-circle" class="ml-1 ml-md-3 mr-3 mb-0"></b-icon> -->
+        <div class="col-5"><p class="my-2 font-weight-bold">아파트명</p></div>
+        <div class="col"><p class="my-2 font-weight-bold">가격</p></div>
+        <div class="col"></div>
       </div>
-      <div v-if="apts && apts.length != 0">
+      <div v-if="apts && apts.length != 0" class="resultList">
         <apt-list-item v-for="(apt, index) in apts" :key="index" :apt="apt" />
       </div>
     </div>
@@ -91,7 +83,37 @@ export default {
         }
       }
     }
+    .resultList {
+      overflow: scroll;
+      height: 800px;
+      width: 450px;
+      &::-webkit-scrollbar-track {
+        border: none;
+        padding: 2px 0;
+        background-color: #ffffff;
+      }
 
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #594d42;
+        border: none;
+      }
+      .apt-list-item {
+        border-radius: 50px;
+        .question__icon {
+          display: flex;
+          align-items: center;
+          img {
+            transform: rotate(90deg);
+          }
+        }
+      }
+    }
     .question-item__card {
       border: none;
     }
