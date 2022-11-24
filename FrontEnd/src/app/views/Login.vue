@@ -1,6 +1,5 @@
 <template>
   <div>
-    <HeaderNav />
     <b-container>
       <!-- First secrtion -->
       <div class="first-section text-center p-5">

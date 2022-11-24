@@ -1,6 +1,5 @@
 <template>
   <div>
-    <HeaderNav />
 
     <div class="bv-example-row mt-3 text-center">
       <h3 class="underline-hotpink"><b-icon icon="journals"></b-icon>Community</h3>
@@ -16,7 +15,6 @@
         first-number
         last-number
       ></b-pagination>
-      <Footer />
     </div>
   </div>
 </template>

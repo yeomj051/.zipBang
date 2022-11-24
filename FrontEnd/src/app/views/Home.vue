@@ -1,6 +1,5 @@
 <template>
   <div>
-    <header-nav />
     <b-container>
       <!-- AptSearch 시작-->
       <div class="first-section text-center">
@@ -33,7 +32,6 @@
       </div>
       <!-- 조회 결과 끝 -->
     </b-container>
-    <Footer />
   </div>
 </template>
 

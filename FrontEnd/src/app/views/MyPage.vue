@@ -1,6 +1,5 @@
 <template>
   <div class="pub-profile">
-    <Header />
     <!-- Banner -->
     <div class="head">
       <div
@@ -179,7 +178,6 @@
         </div>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 

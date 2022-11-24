@@ -1,8 +1,10 @@
 <!-- eslint-disable vue/attribute-hyphenation -->
 <template>
   <div>
+    <header-nav></header-nav>
     <router-view />
     <!-- Share modal -->
+    <Footer></Footer>
   </div>
 </template>
 
@@ -10,8 +12,12 @@
 // import NotificationList from "./components/NotificationList.vue";
 
 import { mapMutations, mapState } from "vuex";
+import HeaderNav from './components/include/HeaderNav.vue';
+import Footer from './components/include/Footer.vue';
+
 
 export default {
+  components: { HeaderNav, Footer},
   name: "App",
   data() {
     return {};

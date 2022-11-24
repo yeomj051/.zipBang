@@ -1,6 +1,5 @@
 <template>
     <div>
-        <HeaderNav />
         <b-container>
             <!-- 관심지역 AreaAdd컴포넌트 시작-->
 
@@ -21,7 +20,6 @@
             </div>
             <!-- 조회 결과 끝 -->
         </b-container>
-        <Footer />
     </div>
 </template>
 

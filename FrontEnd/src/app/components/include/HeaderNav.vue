@@ -4,9 +4,18 @@
       <!-- Navbar logo -->
       <b-navbar-brand href="#">
         <router-link to="/home">
-          <img id="principal-logo" src="../../assets/logos/horizontal-logo.png" alt="" />
+          <img
+            id="principal-logo"
+            src="../../assets/logos/horizontal-logo.png"
+            alt=""
+          />
         </router-link>
-        <router-link to="/home"><img id="secundary-logo" src="../../assets/logos/icon-logo.png" alt="" /></router-link>
+        <router-link to="/home"
+          ><img
+            id="secundary-logo"
+            src="../../assets/logos/icon-logo.png"
+            alt=""
+        /></router-link>
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse" />
@@ -14,22 +23,89 @@
       <!-- Navbar links -->
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto text-center text-dark font-weight-regular">
-          <router-link to="/home" class="px-2 my-auto" active-class="activeLink"> 홈 </router-link>
-          <router-link to="/notice" class="px-2 my-auto" active-class="activeLink"> 공지사항 </router-link>
-          <router-link to="/community" class="px-2 my-auto" active-class="activeLink"> 커뮤니티 </router-link>
-          <router-link to="/interestArea" class="px-2 my-auto" active-class="activeLink"> 관심지역 </router-link>
-          <router-link to="/mypage" class="px-2 my-auto" active-class="activeLink"> 마이페이지 </router-link>
-          <!-- Connect wallet --><!-- @click="connect_wallet()" -->
-          <b-button
-            to="/login"
-            id="login"
-            style="max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
-            class="ml-0 mt-3 mt-lg-0 ml-lg-4 px-4 py-2 rounded-pill font-weight-bold"
-            variant="dark"
+          <router-link
+            to="/home"
+            class="px-2 my-auto"
+            active-class="activeLink"
           >
-            <span v-if="isconnected" class="pr-2"></span>
-            {{ walletConnectText }}
-          </b-button>
+            홈
+          </router-link>
+          <router-link
+            to="/notice"
+            class="px-2 my-auto"
+            active-class="activeLink"
+          >
+            공지사항
+          </router-link>
+          <router-link
+            to="/Community"
+            class="px-2 my-auto"
+            active-class="activeLink"
+          >
+            커뮤니티
+          </router-link>
+          <router-link
+            to="/interestArea"
+            class="px-2 my-auto"
+            active-class="activeLink"
+          >
+            관심지역
+          </router-link>
+          <router-link
+            to="/mypage"
+            class="px-2 my-auto"
+            active-class="activeLink"
+          >
+            마이페이지
+          </router-link>
+          <div v-if="userInfo">
+            <b-button
+              @click="logout"
+              id="home"
+              style="
+                max-width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              "
+              class="
+                ml-0
+                mt-3 mt-lg-0
+                ml-lg-4
+                px-4
+                py-2
+                rounded-pill
+                font-weight-bold
+              "
+              variant="dark"
+            >
+              로그아웃
+            </b-button>
+          </div>
+          <div v-else>
+            <b-button
+              to="/login"
+              id="login"
+              style="
+                max-width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              "
+              class="
+                ml-0
+                mt-3 mt-lg-0
+                ml-lg-4
+                px-4
+                py-2
+                rounded-pill
+                font-weight-bold
+              "
+              variant="dark"
+            >
+              로그인
+            </b-button>
+          </div>
         </b-navbar-nav>
 
         <!-- Controls dropdown -->
@@ -48,7 +124,11 @@
             <b-dropdown-item>
               <div class="py-2">
                 <span class="px-2">
-                  <img style="max-width: 50px" src="../../assets/rsk/RSK_Logo_RGB_150dpi.png" alt="" />
+                  <img
+                    style="max-width: 50px"
+                    src="../../assets/rsk/RSK_Logo_RGB_150dpi.png"
+                    alt=""
+                  />
                 </span>
                 <span>RSK Testnet</span>
               </div>
@@ -71,7 +151,10 @@
               </div>
             </b-dropdown-item>
             <b-dropdown-divider />
-            <b-dropdown-item-button :disabled="disconnectBtnState" @click="disconnectAcc()">
+            <b-dropdown-item-button
+              :disabled="disconnectBtnState"
+              @click="disconnectAcc()"
+            >
               <div class="py-2">
                 <span class="px-2"><b-icon-box-arrow-left /></span>
                 Disconnect
@@ -85,24 +168,64 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
+
+const userStore = "userStore";
+
 export default {
   name: "HeaderNav",
   data() {
-    return {};
+    return {
+      isvisible: false,
+    };
   },
   computed: {
-    walletConnectText() {
-      if (this.$store.state.currentAccount === null) {
-        return "로그인";
-      } else {
-        return this.$store.state.currentAccount.slice(0, 4) + "..." + this.$store.state.currentAccount.slice(36);
-      }
-    },
-    ...mapState(["showinstallMetaModalState", "isconnected", "connectBtnState", "disconnectBtnState", "avatar"]),
+    ...mapState(userStore, ["isLogin", "userInfo"]),
+    ...mapGetters(["checkUserInfo"]),
+
+    // walletConnectText() {
+    //   console.log(sessionStorage.getItem("access-token"), 433242342352);
+    //   if (sessionStorage.getItem("access-token") == "null") {
+    //     this.isvisible = true;
+    //     console.log(this.isvisible, 555555555555555555);
+    //     return true;
+    //   } else {
+    //     this.isvisible = false;
+    //     return false;
+    //   }
+    // },
+
+    ...mapState([
+      "showinstallMetaModalState",
+      "isconnected",
+      "connectBtnState",
+      "disconnectBtnState",
+      "avatar",
+    ]),
   },
   methods: {
     ...mapActions(["showinstallMetaModal", "connect_wallet", "disconnectAcc"]),
+    ...mapActions(userStore, ["userLogout"]),
+
+    logout() {
+      console.log(sessionStorage.getItem("access-token"), 222222222222);
+      sessionStorage.setItem("access-token", null);
+      this.isvisible = true;
+      this.userLogout(this.userInfo.userid);
+      sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
+      sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+
+      if (this.$route.path !== "/home") {
+        this.$router.push({
+          name: "home",
+        });
+      } else {
+        this.$route.redirectedFrom();
+      }
+    },
+    check() {
+      return true;
+    },
   },
 };
 </script>
