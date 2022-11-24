@@ -2,7 +2,7 @@
   <div>
     <div
       v-b-toggle="`collapse-${apt.id}`"
-      class="apt-list-item bg-beige text-light w-100 px-3 px-md-4 py-1 my-4 row"
+      class="apt-list-item bg-beige text-light w-100 px-3 px-md-4 py-1 my-4 row ml-0"
       duration="2000"
     >
       <!-- <b-icon icon="question-circle" class="ml-1 ml-md-3 mr-3 mb-0"></b-icon> -->

@@ -85,12 +85,15 @@ export default {
     }
     .resultList {
       overflow: scroll;
-      height: 800px;
-      width: 450px;
+      height: 600px;
+      width: auto;
+      // padding: 5px;
+      // margin: 10px;
       &::-webkit-scrollbar-track {
         border: none;
         padding: 2px 0;
         background-color: #ffffff;
+        margin-left: 1px;
       }
 
       &::-webkit-scrollbar {
@@ -105,6 +108,7 @@ export default {
       }
       .apt-list-item {
         border-radius: 50px;
+        width: 90%;
         .question__icon {
           display: flex;
           align-items: center;
