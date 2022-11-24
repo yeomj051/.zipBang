@@ -1,50 +1,133 @@
 <template>
-  <div class="pub-profile">
-    <!-- Banner -->
+  <div>
+    <div class="pub-profile">
+      <!-- Banner -->
 
-    <div class="head">
-      <div
-        class="user-profile__background2"
-        :style="{
-          'background-repeat': 'no-repeat',
-          'background-position': 'center',
-          'background-size': 'cover',
-          'background-image': 'url(' + creator_bg + ')',
-        }"
-      />
-      <!-- User avatar -->
-      <div class="user-avatar__container2 text-center">
-        <b-avatar :src="`${creator_avatar}`" size="9rem" />
+      <div class="head">
+        <div
+          class="user-profile__background2"
+          :style="{
+            'background-repeat': 'no-repeat',
+            'background-position': 'center',
+            'background-size': 'cover',
+            'background-image': 'url(' + creator_bg + ')',
+          }"
+        />
+        <!-- User avatar -->
+        <div class="user-avatar__container2 text-center">
+          <b-avatar :src="`${creator_avatar}`" size="9rem" />
+        </div>
+      </div>
+
+      <div class="creator-information__container text-center">
+        <!-- personal information -->
+        <div class="creator-personal-info__container">
+          <div class="user-name__container my-3">
+            <br />
+            <h2>{{ userInfo.nickName }}</h2>
+          </div>
+          <br />
+          <h3>
+            소개
+            <a
+              ><span><b-icon icon="pencil-square" @click="edit"></b-icon></span
+            ></a>
+          </h3>
+
+          <textarea
+            rows="4"
+            cols="50"
+            v-model="textVal"
+            :readonly="editFlag"
+            :autoHeight="autoHeight"
+            class="textMsg"
+            @input="inputing"
+            @dblclick="dblclick"
+            @blur="blur"
+          ></textarea>
+        </div>
       </div>
     </div>
 
-    <div class="creator-information__container text-center">
-      <!-- personal information -->
-      <div class="creator-personal-info__container">
-        <div class="user-name__container my-3">
-          <br />
-          <h2>{{ userInfo.nickName }}</h2>
-        </div>
-        <br />
-        <h3>
-          소개
-          <a
-            ><span><b-icon icon="pencil-square" @click="edit"></b-icon></span
-          ></a>
-        </h3>
-
-        <textarea
-          rows="4"
-          cols="50"
-          v-model="textVal"
-          :readonly="editFlag"
-          :autoHeight="autoHeight"
-          class="textMsg"
-          @input="inputing"
-          @dblclick="dblclick"
-          @blur="blur"
-        ></textarea>
+    <div class="search-creator text-center">
+      <div class="search-creator-input__container text-center">
+        <input
+          class="search-creator__input font-weight-bold"
+          type="text"
+          placeholder="이름"
+          v-model="user.name"
+          @keyup.enter="confirm"
+        />
       </div>
+      <br />
+
+      <!-- 비밀번호 입력 -->
+      <div class="search-creator-input__container">
+        <input
+          class="search-creator__input font-weight-bold"
+          type="password"
+          placeholder="비밀번호"
+          v-model="user.password"
+          @keyup.enter="confirm"
+        />
+      </div>
+      <br />
+      <!-- 전화번호 입력 -->
+      <div class="search-creator-input__container">
+        <input
+          class="search-creator__input font-weight-bold"
+          type="text"
+          placeholder="전화번호 ex) 010-1234-5678"
+          v-model="user.phone"
+          @keyup.enter="confirm"
+        />
+      </div>
+      <br />
+      <!-- 닉네임 입력 -->
+      <div class="search-creator-input__container">
+        <input
+          class="search-creator__input font-weight-bold"
+          type="text"
+          placeholder="닉네임"
+          v-model="user.nickName"
+          @keyup.enter="confirm"
+        />
+      </div>
+      <br />
+      <!-- 주소 입력 -->
+      <div class="search-creator-input__container">
+        <input
+          class="search-creator__input font-weight-bold"
+          type="text"
+          placeholder="주소"
+          v-model="user.address"
+          @keyup.enter="confirm"
+        />
+      </div>
+      <br />
+
+      <!-- 회원가입 버튼 -->
+      <b-button
+        id="findPw"
+        style="
+          max-width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        "
+        class="
+          ml-0
+          mt-3 mt-lg-0
+          ml-lg-4
+          px-5
+          py-2
+          rounded-pill
+          font-weight-bold
+        "
+        variant="dark"
+        @click="isJoin"
+        >정보수정
+      </b-button>
     </div>
   </div>
 </template>
@@ -88,6 +171,16 @@ export default {
 
   data() {
     return {
+      user: {
+        id: null,
+        name: null,
+        email: null,
+        password: null,
+        phone: null,
+        nickName: null,
+        address: null,
+        gender: null,
+      },
       noSite: "No site :(",
       noTitle: "No title added",
       noSub: "No subtitle added",
@@ -140,6 +233,12 @@ export default {
   created() {
     this.textVal = this.userInfo.introduce;
     this.startedCampaigns();
+
+    this.user.name = this.userInfo.name;
+    this.user.phone = this.userInfo.phone;
+    this.user.nickName = this.userInfo.nickName;
+    this.user.address = this.userInfo.address;
+    this.user.password = this.userInfo.password;
   },
   watch: {
     $route(to, from) {
@@ -172,8 +271,36 @@ export default {
     },
   },
   methods: {
+    isJoin() {
+      this.userInfo.name = this.user.name;
+      this.userInfo.phone = this.user.phone;
+      this.userInfo.nickName = this.user.nickName;
+      this.userInfo.address = this.user.address;
+      this.userInfo.password = this.user.password;
+
+      api
+        .post(`/user/update`, JSON.stringify(this.userInfo))
+        .then(({ data }) => {
+          console.log(data);
+          alert("정보수정 되었습니다.");
+          this.$router.push({ name: "home" });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
     ...mapActions(userStore, ["userLogout"]),
     ...mapMutations(["ALLOW_SPEND"]),
+    ...mapActions(userStore, ["userConfirm", "getUserInfo"]),
+    async confirm() {
+      await this.userConfirm(this.user);
+      let token = sessionStorage.getItem("access-token");
+      if (this.isLogin) {
+        await this.getUserInfo(token);
+        this.$router.push({ name: "home" });
+      }
+    },
     inputing(val) {
       console.log(val);
     },

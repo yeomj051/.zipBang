@@ -47,6 +47,11 @@ public class UserService {
     public User updateIntroduce(User user) throws Exception{
         User getUser = userRepository.findById(user.getId()).get();
         getUser.setIntroduce(user.getIntroduce());
+        getUser.setAddress(user.getAddress());
+        getUser.setName(user.getName());
+        getUser.setNickName(user.getNickName());
+        getUser.setPhone(user.getPhone());
+
         return userRepository.save(getUser);
 
     }
