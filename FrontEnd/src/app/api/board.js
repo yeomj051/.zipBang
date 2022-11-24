@@ -4,11 +4,11 @@ const api = apiInstance();
 
 class Board {
   listArticle(param, success, fail) {
-    api.get(`/board`, { params: param }).then(success).catch(fail);
+    api.get(`/vue/board`, { params: param }).then(success).catch(fail);
   }
 
   writeArticle(article, success, fail) {
-    api.post(`/board`, JSON.stringify(article)).then(success).catch(fail);
+    api.post(`/vue/board`, JSON.stringify(article)).then(success).catch(fail);
   }
 
   getArticle(articleno, success, fail) {
@@ -16,7 +16,7 @@ class Board {
   }
 
   modifyArticle(article, success, fail) {
-    api.put(`/board`, JSON.stringify(article)).then(success).catch(fail);
+    api.put(`/vue/board`, JSON.stringify(article)).then(success).catch(fail);
   }
 
   deleteArticle(articleno, success, fail) {
@@ -24,4 +24,4 @@ class Board {
   }
 }
 
-export { board };
+export { Board };

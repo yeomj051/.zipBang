@@ -79,12 +79,7 @@
     <!-- 회원가입 버튼 -->
     <b-button
       id="findPw"
-      style="
-        max-width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      "
+      style="max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
       class="ml-0 mt-3 mt-lg-0 ml-lg-4 px-5 py-2 rounded-pill font-weight-bold"
       variant="dark"
       @click="isJoin"
@@ -92,7 +87,7 @@
     </b-button>
   </div>
 </template>
-    <script>
+<script>
 import { thisExpression } from "@babel/types";
 import { mapState, mapActions } from "vuex";
 import { apiInstance } from "../../api/index.js";
@@ -128,8 +123,6 @@ export default {
       }
     },
     isJoin() {
-      console.log(12313123);
-
       api
         .post(`/user/join`, JSON.stringify(this.user))
         .then(({ data }) => {
@@ -149,5 +142,4 @@ export default {
   },
 };
 </script>
-    <style></style>
-    
+<style></style>

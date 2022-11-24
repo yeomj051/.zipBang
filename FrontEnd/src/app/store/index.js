@@ -8,6 +8,7 @@ import { actions } from "./actions";
 //modules
 import aptStore from "./modules/aptStore";
 import userStore from "./modules/userStore";
+import boardStore from "./modules/boardStore";
 
 Vue.use(Vuex);
 
@@ -19,5 +20,6 @@ export default new Vuex.Store({
   modules: {
     aptStore,
     userStore,
+    boardStore,
   },
 });
