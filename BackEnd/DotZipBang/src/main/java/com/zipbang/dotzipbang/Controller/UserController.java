@@ -32,18 +32,73 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("/user")
 public class UserController {
 
-    public static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    private static final String SUCCESS = "success";
-    private static final String FAIL = "fail";
+	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final String SUCCESS = "success";
+	private static final String FAIL = "fail";
 
-    private final JwtServiceImpl jwtService;
-    private final UserService userService;
+	private final JwtServiceImpl jwtService;
+	private final UserService userService;
 
+
+	@ApiOperation(value = "회원 정보 수정", notes = "회원 정보 수정", response = User.class)
+	@PostMapping("/update")
+	public ResponseEntity<?> update(
+			@RequestBody @ApiParam(value = "회원아이디 및 수정될 소개 내용", required = true) User user, HttpServletResponse response ) {
+		Map<String, Object> resultMap = new HashMap<>();
+		System.out.println(user.toString());
+		HttpStatus status = null;
+		User joinUser=null;
+		try {
+
+			joinUser = userService.updateIntroduce(user);
+			if(joinUser!=null){
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			}
+			else {
+				resultMap.put("message", FAIL);
+				status = HttpStatus.BAD_REQUEST;
+			}
+		} catch (Exception e) {
+			logger.error("회원가입 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<User>(joinUser, status);
+	}
+
+
+	@ApiOperation(value = "회원가입", notes = "회원가입된 정보를 반환한ㄷ,.", response = User.class)
+	@PostMapping("/join")
+	public ResponseEntity<?> join(
+			@RequestBody @ApiParam(value = "회원가입 정보들", required = true) User user, HttpServletResponse response ) {
+		Map<String, Object> resultMap = new HashMap<>();
+		System.out.println(user.toString());
+		HttpStatus status = null;
+		User joinUser=null;
+		try {
+
+			joinUser = userService.join(user);
+			if(joinUser!=null){
+				resultMap.put("message", SUCCESS);
+				status = HttpStatus.ACCEPTED;
+			}
+			else {
+				resultMap.put("message", FAIL);
+				status = HttpStatus.BAD_REQUEST;
+			}
+		} catch (Exception e) {
+			logger.error("회원가입 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<User>(joinUser, status);
+	}
 
 	@ApiOperation(value = "로그인", notes = "Access-token과 로그인 결과 메세지를 반환한다.", response = Map.class)
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> login(
-            @RequestBody @ApiParam(value = "로그인 시 필요한 회원정보(아이디, 비밀번호).", required = true) User user, HttpServletResponse response ) {
+			@RequestBody @ApiParam(value = "로그인 시 필요한 회원정보(아이디, 비밀번호).", required = true) User user, HttpServletResponse response ) {
 		Map<String, Object> resultMap = new HashMap<>();
 		System.out.println(user.toString());
 		HttpStatus status = null;
@@ -63,7 +118,7 @@ public class UserController {
 				status = HttpStatus.ACCEPTED;
 			} else {
 				resultMap.put("message", FAIL);
-				status = HttpStatus.ACCEPTED;
+				status = HttpStatus.BAD_REQUEST;
 			}
 		} catch (Exception e) {
 			logger.error("로그인 실패 : {}", e);

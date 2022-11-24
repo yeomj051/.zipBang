@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -15,7 +16,9 @@ import java.util.Map;
 public class UserService {
 
     private final UserRepository userRepository;
-
+    public User join(User user){
+        return userRepository.save(user);
+    }
     public User login(User user) throws Exception {
         if (user.getEmail() == null || user.getPassword() == null)
             return null;
@@ -37,5 +40,11 @@ public class UserService {
     public void deleRefreshToken(String userEmail) throws Exception {
         Map<String, String> map = new HashMap<String, String>();
         userRepository.deleteRefreshToken(userEmail,null);
+    }
+    public User updateIntroduce(User user) throws Exception{
+        User getUser = userRepository.findById(user.getId()).get();
+        getUser.setIntroduce(user.getIntroduce());
+        return userRepository.save(getUser);
+
     }
 }
