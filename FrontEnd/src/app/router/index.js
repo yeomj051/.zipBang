@@ -40,7 +40,7 @@ const routes = [
   {
     path: "/mypage",
     name: "mypage",
-    component: () => import(/* webpackChunkName:"home" */ "../views/ExploreView"),
+    component: () => import(/* webpackChunkName:"home" */ "../views/MyPage"),
   },
   {
     path: "/about",
@@ -72,11 +72,11 @@ const routes = [
   //     name: "bitcoffee",
   //     component: () => import(/* webpackChunkName:"home" */ "../views/BitcoffeeView"),
   // },
-  // {
-  //     path: "/member/:id",
-  //     name: "member",
-  //     component: () => import(/* webpackChunkName:"home" */ "../views/MemberView"),
-  // },
+  {
+    path: "/member/:id",
+    name: "member",
+    component: () => import(/* webpackChunkName:"home" */ "../views/MemberView"),
+  },
 ];
 
 const router = new Router({

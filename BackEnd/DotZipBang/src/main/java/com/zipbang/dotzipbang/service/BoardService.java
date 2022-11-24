@@ -1,6 +1,5 @@
 package com.zipbang.dotzipbang.service;
 
-import com.zipbang.dotzipbang.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -8,8 +7,16 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class BoardService {
-
-    private final BoardRepository boardRepository;
-
+//
+//    private final BoardRepository boardRepository;
+//
+//    public boolean writeArticle(Board board) throws Exception;
+//    public List<BoardDto> listArticle(BoardParameterDto boardParameterDto) throws Exception;
+//    public PageNavigation makePageNavigation(BoardParameterDto boardParameterDto) throws Exception;
+//
+//    public BoardDto getArticle(int articleno) throws Exception;
+//    public void updateHit(int articleno) throws Exception;
+//    public boolean modifyArticle(BoardDto boardDto) throws Exception;
+//    public boolean deleteArticle(int articleno) throws Exception;
 
 }

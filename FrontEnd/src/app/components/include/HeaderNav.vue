@@ -6,9 +6,7 @@
         <router-link to="/home">
           <img id="principal-logo" src="../../assets/logos/horizontal-logo.png" alt="" />
         </router-link>
-        <router-link to="/home"
-          ><img id="secundary-logo" src="../../assets/logos/icon-logo.png" alt=""
-        /></router-link>
+        <router-link to="/home"><img id="secundary-logo" src="../../assets/logos/icon-logo.png" alt="" /></router-link>
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse" />
@@ -17,18 +15,10 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto text-center text-dark font-weight-regular">
           <router-link to="/home" class="px-2 my-auto" active-class="activeLink"> 홈 </router-link>
-          <router-link to="/notice" class="px-2 my-auto" active-class="activeLink">
-            공지사항
-          </router-link>
-          <router-link to="/community" class="px-2 my-auto" active-class="activeLink">
-            커뮤니티
-          </router-link>
-          <router-link to="/interestArea" class="px-2 my-auto" active-class="activeLink">
-            관심지역
-          </router-link>
-          <router-link to="/mypage" class="px-2 my-auto" active-class="activeLink">
-            마이페이지
-          </router-link>
+          <router-link to="/notice" class="px-2 my-auto" active-class="activeLink"> 공지사항 </router-link>
+          <router-link to="/community" class="px-2 my-auto" active-class="activeLink"> 커뮤니티 </router-link>
+          <router-link to="/interestArea" class="px-2 my-auto" active-class="activeLink"> 관심지역 </router-link>
+          <router-link to="/mypage" class="px-2 my-auto" active-class="activeLink"> 마이페이지 </router-link>
           <!-- Connect wallet --><!-- @click="connect_wallet()" -->
           <b-button
             to="/login"
@@ -58,11 +48,7 @@
             <b-dropdown-item>
               <div class="py-2">
                 <span class="px-2">
-                  <img
-                    style="max-width: 50px"
-                    src="../../assets/rsk/RSK_Logo_RGB_150dpi.png"
-                    alt=""
-                  />
+                  <img style="max-width: 50px" src="../../assets/rsk/RSK_Logo_RGB_150dpi.png" alt="" />
                 </span>
                 <span>RSK Testnet</span>
               </div>
@@ -110,20 +96,10 @@ export default {
       if (this.$store.state.currentAccount === null) {
         return "로그인";
       } else {
-        return (
-          this.$store.state.currentAccount.slice(0, 4) +
-          "..." +
-          this.$store.state.currentAccount.slice(36)
-        );
+        return this.$store.state.currentAccount.slice(0, 4) + "..." + this.$store.state.currentAccount.slice(36);
       }
     },
-    ...mapState([
-      "showinstallMetaModalState",
-      "isconnected",
-      "connectBtnState",
-      "disconnectBtnState",
-      "avatar",
-    ]),
+    ...mapState(["showinstallMetaModalState", "isconnected", "connectBtnState", "disconnectBtnState", "avatar"]),
   },
   methods: {
     ...mapActions(["showinstallMetaModal", "connect_wallet", "disconnectAcc"]),

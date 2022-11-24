@@ -72,7 +72,7 @@ export default {
   }
   .question__section {
     width: 80%;
-    margin: 100px 0 200px;
+    margin: 0px 0 200px;
     .question-item {
       border-radius: 50px;
       .question__icon {
