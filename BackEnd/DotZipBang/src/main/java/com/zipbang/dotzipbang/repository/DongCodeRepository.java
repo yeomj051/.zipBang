@@ -19,4 +19,6 @@ public interface DongCodeRepository extends JpaRepository<DongCode,Long> {
 
     @Query(value = "select dc from DongCode dc where substring(dc.dongCode,1,4) = :dongCode and substring(dc.dongCode,5,10) <> '000000'")
     List<DongCode> getDongList(String dongCode);
+
+    DongCode findByDongCode(String dongCode);
  }

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -16,6 +17,8 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    @Transactional
     public User join(User user){
         return userRepository.save(user);
     }

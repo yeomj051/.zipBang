@@ -1,6 +1,6 @@
-import { apiInstance } from "./index.js";
+import { apiInstance,boardInstance } from "./index.js";
 
-const api = apiInstance();
+const api = boardInstance();
 
 class Board {
   listArticle(param, success, fail) {

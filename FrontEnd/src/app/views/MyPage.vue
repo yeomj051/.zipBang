@@ -1,6 +1,7 @@
 <template>
   <div class="pub-profile">
     <!-- Banner -->
+
     <div class="head">
       <div
         class="user-profile__background2"
@@ -21,193 +22,81 @@
       <!-- personal information -->
       <div class="creator-personal-info__container">
         <div class="user-name__container my-3">
-          <p class="font-weight-bold pt-5 px-2">
-            {{ this.$route.params.id }}
-          </p>
-          <b-icon id="verify__badge" icon="patch-check-fill" v-if="memberVerified"></b-icon>
+          <br />
+          <h2>{{ userInfo.nickName }}</h2>
         </div>
-        <b-button id="address" pill variant="outline-dark" class="px-5 font-weight-bold"
-          >{{ myaddress }} <b-icon icon="files"></b-icon></b-button
-        ><br />
-        <a :href="'https://' + site" target="_blank" style="display: inline-block" class="user-site my-4">
-          {{ site }}<span class="px-2"><b-icon icon="box-arrow-up-right"></b-icon></span>
-        </a>
+        <br />
+        <h3>
+          소개
+          <a
+            ><span><b-icon icon="pencil-square" @click="edit"></b-icon></span
+          ></a>
+        </h3>
 
-        <p class="font-weight-bold" style="opacity: 40%">
-          Member since {{ monthNames[new Date(memberSince).getMonth()] }},
-          {{ new Date(memberSince).getFullYear() }}
-        </p>
-      </div>
-
-      <!-- creator information -->
-      <div class="creator-information">
-        <b-row class="creator-row">
-          <b-col cols="12" md="12" lg="6" xl="7" class="p-0">
-            <div class="creator-description__container">
-              <div class="creator-description__card p-5">
-                <h3 class="font-weight-bold">{{ title }}</h3>
-                <p class="font-weight-bold">{{ subtitle }}</p>
-                <hr />
-                <p>
-                  {{ description }}
-                </p>
-                <div
-                  class="social__section"
-                  v-if="creator_twitter || creator_instagram || creator_youtube || creator_twitch"
-                >
-                  <b-button
-                    size="lg"
-                    pill
-                    variant="outline-primary"
-                    class="mb-2"
-                    :href="creator_instagram"
-                    target="_blank"
-                    v-b-tooltip.hover.top="'Instagram'"
-                    v-if="creator_instagram"
-                  >
-                    <b-icon icon="instagram" aria-label="Help"></b-icon>
-                  </b-button>
-                  <b-button
-                    size="lg"
-                    pill
-                    variant="outline-primary"
-                    class="mb-2"
-                    :href="creator_twitter"
-                    target="_blank"
-                    v-b-tooltip.hover.top="'Twitter'"
-                    v-if="creator_twitter"
-                  >
-                    <b-icon icon="twitter" aria-label="Help"></b-icon>
-                  </b-button>
-                  <b-button
-                    size="lg"
-                    pill
-                    variant="outline-primary"
-                    class="mb-2"
-                    :href="creator_youtube"
-                    target="_blank"
-                    v-b-tooltip.hover.top="'YouTube'"
-                    v-if="creator_youtube"
-                  >
-                    <b-icon icon="youtube" aria-label="Help"></b-icon>
-                  </b-button>
-                  <b-button
-                    size="lg"
-                    pill
-                    variant="outline-primary"
-                    class="mb-2"
-                    :href="creator_twitch"
-                    target="_blank"
-                    v-b-tooltip.hover.top="'Twitch'"
-                    v-if="creator_twitch"
-                  >
-                    <b-icon icon="twitch" aria-label="Help"></b-icon>
-                  </b-button>
-                </div>
-              </div>
-            </div>
-
-            <!-- category desc -->
-            <div class="category-description__container">
-              <router-link to="/explore" id="category-card">
-                <div class="category-description__card p-5">
-                  <h3 class="font-weight-bold">Category</h3>
-                  <p class="font-weight-bold">
-                    {{ creator_category || "No category specify" }}
-                  </p>
-                  <p class="pt-3 pb-1 border-top">
-                    <span class="mr-2"><b-icon icon="arrow-right-circle-fill"></b-icon></span>
-                    Explore more
-                  </p>
-                  <small>You can find more people with the same hobbies.</small>
-                </div>
-              </router-link>
-            </div>
-          </b-col>
-          <b-col cols="12" md="12" lg="6" xl="5" class="p-0">
-            <!-- donation box -->
-            <div class="donation-box__container">
-              <DonateBoxView />
-            </div>
-          </b-col>
-        </b-row>
-
-        <!-- creator goals -->
-        <div class="user-goals__list p-0 m-0">
-          <h1 class="my-4 font-weight-bold">My goals</h1>
-          <p>Here you can help me to continue my stuff.</p>
-          <b-row v-if="!skeler" class="skeler">
-            <b-col class="d-flex justify-content-center my-4" cols="12" md="12" lg="6">
-              <div class="hola">
-                <b-skeleton-img no-aspect width="100%" height="100%"></b-skeleton-img>
-              </div>
-            </b-col>
-            <b-col class="d-flex justify-content-center my-4" cols="12" md="12 " lg="6">
-              <div class="hola">
-                <b-skeleton-img no-aspect width="100%" height="100%"></b-skeleton-img>
-              </div>
-            </b-col>
-          </b-row>
-          <b-row class="mt-5">
-            <b-col cols="12" md="10" class="mx-auto" v-if="!noCampaigns">
-              <ul class="d-flex justify-content-center justify-content-md-around flex-wrap p-0 m-0">
-                <li id="goal-per" v-for="(campaign, idx) in campaigns_rif" :key="idx" class="p-0 m-0">
-                  <UserGoalCard
-                    :collapse_a="'card' + idx"
-                    :collapse_b="'card' + idx"
-                    :collapse_c="'card' + idx"
-                    :collapse_d="'card' + idx"
-                    :campId="campaign.id"
-                    :campCategory="campaign.category"
-                    :campCreator="campaign.creator"
-                    :campDesc="campaign.description"
-                    :campTitle="campaign.title"
-                    :campGoal="campaign.goal"
-                    :campPledged="campaign.pledged"
-                    :campEndAt="campaign.endAt"
-                    :campStartAt="campaign.startAt"
-                    :campClaimed="campaign.claimed"
-                  />
-                </li>
-              </ul>
-            </b-col>
-            <b-col cols="12" class="mx-auto text-center mt-5" style="height: 500px" v-else>
-              <p style="opacity: 40%"><strong>No results</strong></p>
-            </b-col>
-          </b-row>
-        </div>
+        <textarea
+          rows="4"
+          cols="50"
+          v-model="textVal"
+          :readonly="editFlag"
+          :autoHeight="autoHeight"
+          class="textMsg"
+          @input="inputing"
+          @dblclick="dblclick"
+          @blur="blur"
+        ></textarea>
       </div>
     </div>
   </div>
 </template>
-
-<script>
+  
+  <script>
 import UserGoalCard from "../components/UserGoalCard.vue";
 import DonateBoxView from "../components/DonateBoxView.vue";
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
-import { mapMutations, mapState } from "vuex";
+import { mapMutations } from "vuex";
 import { client } from "../../lib/sanityClient";
+import { mapState, mapGetters, mapActions } from "vuex";
+
+const userStore = "userStore";
 
 const Web3 = require("web3");
-const web3 = new Web3(Web3.givenProvider || "https://public-node.testnet.rsk.co");
+const web3 = new Web3(
+  Web3.givenProvider || "https://public-node.testnet.rsk.co"
+);
 
 const provider = window.ethereum;
 
 const artifact_crowdfunding = require("../../../build/contracts/CrowdFund.json");
 const artifact_crowdfunding_rif = require("../../../build/contracts/CrowdFundERC677.json");
 let tokenContract;
+import { apiInstance } from "../api/index.js";
 
+const api = apiInstance();
 export default {
   name: "MyPage",
+
+  props: {
+    rows: {
+      default: "",
+    },
+
+    autoHeight: {
+      default: true,
+    },
+  },
+
   data() {
     return {
-      myaddress: "",
       noSite: "No site :(",
       noTitle: "No title added",
       noSub: "No subtitle added",
       noDesc: "No description added",
       noBg: "https://images.unsplash.com/photo-1554147090-e1221a04a025?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1148&q=80",
+
+      status: false,
+      textVal: null,
+      editFlag: true,
 
       donation: 0,
       monthNames: [
@@ -224,8 +113,6 @@ export default {
         "November",
         "December",
       ],
-      memberSince: "",
-      memberVerified: false,
       memberAddress: "",
 
       campaigns_rif: [],
@@ -246,29 +133,12 @@ export default {
       user: this.$route.params.id,
     });
 
-    const query = '*[_type == "users" && userName == $user] {userName, userAddress, _createdAt, userVerify}';
+    const query =
+      '*[_type == "users" && userName == $user] {userName, userAddress, _createdAt, userVerify}';
     const params = { user: this.$route.params.id };
-
-    client
-      .fetch(query, params)
-      .then((users) => {
-        console.log(users);
-        if (users.length > 0) {
-          users.forEach((user) => {
-            this.myaddress = user.userAddress.slice(0, 4) + "..." + user.userAddress.slice(36);
-            this.memberSince = user._createdAt;
-            this.memberVerified = user.userVerify;
-            this.memberAddress = user.userAddress;
-          });
-        } else {
-          console.log("Creator not found");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   },
   created() {
+    this.textVal = this.userInfo.introduce;
     this.startedCampaigns();
   },
   watch: {
@@ -277,7 +147,8 @@ export default {
         user: to.params.id,
       });
 
-      const query = '*[_type == "users" && userName == $user] {userName, userAddress}';
+      const query =
+        '*[_type == "users" && userName == $user] {userName, userAddress}';
       const params = { user: this.$route.params.id };
 
       client
@@ -286,7 +157,10 @@ export default {
           console.log(users);
           if (users.length > 0) {
             users.forEach((user) => {
-              this.myaddress = user.userAddress.slice(0, 4) + "..." + user.userAddress.slice(36);
+              this.myaddress =
+                user.userAddress.slice(0, 4) +
+                "..." +
+                user.userAddress.slice(36);
             });
           } else {
             console.log("Creator not found");
@@ -298,7 +172,35 @@ export default {
     },
   },
   methods: {
+    ...mapActions(userStore, ["userLogout"]),
     ...mapMutations(["ALLOW_SPEND"]),
+    inputing(val) {
+      console.log(val);
+    },
+    dblclick(e) {
+      this.status = false;
+    },
+    blur(e) {
+      this.status = true;
+    },
+    edit() {
+      if (this.editFlag) {
+        this.editFlag = false;
+      } else {
+        this.userInfo.introduce = this.textVal;
+        console.log(this.userInfo, 22222222222);
+        api
+          .post(`/user/update`, JSON.stringify(this.userInfo))
+          .then(({ data }) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("이미 존재하는 이메일 입니다. 다시 입력해 주세요");
+          });
+        this.editFlag = true;
+      }
+    },
     async fetchCamps() {
       if (provider) {
         const net = await web3.eth.net.getId();
@@ -309,22 +211,13 @@ export default {
           artifact_crowdfunding_rif.networks[net].address
         );
 
-        tokenContract.setProvider(Web3.givenProvider || "https://public-node.testnet.rsk.co");
+        tokenContract.setProvider(
+          Web3.givenProvider || "https://public-node.testnet.rsk.co"
+        );
 
-        const totalCamps = await tokenContract.methods.creatorCamps(this.memberAddress).call();
-
-        // if (totalCamps < 1) {
-        //   console.log("No campaigns");
-        // } else {
-        //   for (let i = 0; i < totalCamps; i++) {
-        //     let campaign = await tokenContract.methods
-        //       .campaignsAddress(this.memberAddress, i)
-        //       .call();
-
-        //     this.campaigns_rif.push(await campaign);
-        //     console.log(this.campaigns_rif);
-        //   }
-        // }
+        const totalCamps = await tokenContract.methods
+          .creatorCamps(this.memberAddress)
+          .call();
 
         if (totalCamps < 1) {
           console.log("No campaigns");
@@ -332,9 +225,13 @@ export default {
         } else {
           this.skeler = true;
           for (let i = 0; i < totalCamps; i++) {
-            let campaign = await tokenContract.methods.campaignsAddress(this.memberAddress, i).call();
+            let campaign = await tokenContract.methods
+              .campaignsAddress(this.memberAddress, i)
+              .call();
 
-            let newCampaign = await tokenContract.methods.campaigns(await campaign.id).call();
+            let newCampaign = await tokenContract.methods
+              .campaigns(await campaign.id)
+              .call();
 
             if ((await newCampaign.id) !== "0") {
               this.campaigns_rif.push(await newCampaign);
@@ -368,6 +265,9 @@ export default {
     },
   },
   computed: {
+    ...mapState(userStore, ["isLogin", "userInfo"]),
+    ...mapGetters(["checkUserInfo"]),
+
     ...mapState([
       "currentAccount",
       "creator_username",
@@ -394,7 +294,9 @@ export default {
       let min = new Date().getMinutes();
       let hrs = new Date().getHours();
       let mil = new Date().getSeconds();
-      const FDate = new Date(this.formattedStart + " " + hrs + ":" + min + ":" + mil);
+      const FDate = new Date(
+        this.formattedStart + " " + hrs + ":" + min + ":" + mil
+      );
       return (this.startUnixtime = FDate.getTime() / 1000);
     },
 
@@ -459,8 +361,8 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
+  
+  <style lang="scss">
 #category-card {
   transition: ease-in-out 0.2s;
   &:hover {
@@ -473,7 +375,7 @@ export default {
   position: relative;
   .user-profile__background2 {
     width: 100%;
-    height: 300px;
+    height: 100px;
   }
 
   // avatar styles
@@ -558,7 +460,11 @@ export default {
       }
 
       .category-description__card {
-        background-image: linear-gradient(to bottom, rgba(113, 113, 113, 0.63), rgba(0, 0, 0, 0.69)),
+        background-image: linear-gradient(
+            to bottom,
+            rgba(113, 113, 113, 0.63),
+            rgba(0, 0, 0, 0.69)
+          ),
           url("../assets/images/chill-back.jpg");
         background-position: center;
         background-repeat: no-repeat;
@@ -594,3 +500,4 @@ export default {
   }
 }
 </style>
+  

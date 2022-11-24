@@ -29,6 +29,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "update User u set u.token = :token where u.email=:userEmail")
     void deleteRefreshToken(String userEmail,String token);
 
-
+    User findByEmail(String email);
 
 }

@@ -1,6 +1,7 @@
 package com.zipbang.dotzipbang.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.Subselect;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Immutable
 @Data
+@Getter
 @NoArgsConstructor
 
 public class DealListView {

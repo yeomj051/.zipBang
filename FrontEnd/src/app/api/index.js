@@ -11,4 +11,16 @@ function apiInstance() {
   return instance;
 }
 
-export { apiInstance };
+function boardInstance() {
+  const instance = axios.create({
+    baseURL: `http://localhost:9988`,
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  });
+  return instance;
+}
+export {
+  apiInstance,
+  boardInstance
+};

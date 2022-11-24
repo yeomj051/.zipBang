@@ -35,7 +35,7 @@
     <div class="search-creator-input__container">
       <input
         class="search-creator__input font-weight-bold"
-        type="text"
+        type="password"
         placeholder="비밀번호"
         v-model="user.password"
         @keyup.enter="confirm"
@@ -79,7 +79,12 @@
     <!-- 회원가입 버튼 -->
     <b-button
       id="findPw"
-      style="max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis"
+      style="
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      "
       class="ml-0 mt-3 mt-lg-0 ml-lg-4 px-5 py-2 rounded-pill font-weight-bold"
       variant="dark"
       @click="isJoin"
