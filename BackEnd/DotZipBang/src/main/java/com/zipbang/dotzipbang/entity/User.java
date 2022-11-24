@@ -3,6 +3,8 @@ package com.zipbang.dotzipbang.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 
@@ -10,16 +12,20 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name = "user")
+@Setter
 public class User extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private Long id;
     private String userid;
+
+    @Column(unique = true)
     private String email;
     private String password;
     private String name;
     private String phone;
+    private String nickName;
 
     private String address;
     private String introduce;
